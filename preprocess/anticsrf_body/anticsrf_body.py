@@ -9,7 +9,7 @@ from lib.core.data import logger # get access to sqlmap logger
 from urllib.parse import parse_qs, urlencode
 
 # ADJUST THIS NAME TO YOUR NEEDS
-__TOKEN_NAME = b"__RequestVerificationToken"
+__TOKEN_NAME = b"csrf_token"
 
 
 def getCSRF(html):
