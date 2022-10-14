@@ -9,7 +9,7 @@ from lib.core.data import logger # get access to sqlmap logger
 from urllib.parse import parse_qs, urlencode
 
 # ADJUST THIS NAME TO YOUR NEEDS
-__TOKEN_NAME = b"csrf_token"
+__TOKEN_NAME = b"__RequestVerificationToken"
 
 
 def getCSRF(html):
@@ -26,7 +26,7 @@ def getCSRF(html):
     try:
         csrf = soup.find(attrs={"name": __TOKEN_NAME}).get('value')
     except:
-        logger.debug(f"[{__name__}] HTML element with id='{__TOKEN_NAME}' not found")
+        logger.debug(f"[{__name__}] HTML element with attribute name='{__TOKEN_NAME}' not found")
     else:
         return csrf
 
