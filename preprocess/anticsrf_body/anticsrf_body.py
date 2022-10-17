@@ -57,3 +57,14 @@ def preprocess(req):
             # Update data
             data = urlencode(data)
             req.data = data.encode('ascii')
+
+            # Handle original cookies
+            if req.has_header("Cookie"):
+                logger.debug(f"[{__name__}] original cookies: {req.get_header('Cookie')}")
+            # Handle cookies from first request
+            if r.cookies:
+                logger.debug(f"[{__name__}] retrieved cookies: {r.cookies.get_dict()}")
+                # Overwrite cookies
+                req.remove_header("Cookie")
+                r.cookies.add_cookie_header(req)
+                logger.debug(f"[{__name__}] final cookies: {req.get_header('Cookie')}")
